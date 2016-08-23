@@ -4,71 +4,112 @@ import cv2
 import numpy as np
 from keras.models import Model
 from keras.layers import Input, merge, Convolution2D, MaxPooling2D, UpSampling2D
-from keras.optimizers import Adam
+from keras.layers.core import Dropout
+from keras.optimizers import *
+from keras.constraints import maxnorm
 from keras.callbacks import ModelCheckpoint, LearningRateScheduler
 from keras import backend as K
+from keras.utils.visualize_util import plot
+from ImageDataGenerator import ImageDataGenerator
 
 from data import load_train_data, load_test_data
 
 img_rows = 64
-img_cols = 80
+img_cols = 96
+#img_rows = 208
+#img_cols = 288
 
 smooth = 1.
+smooth_loss = 1. 
 
 
 def dice_coef(y_true, y_pred):
     y_true_f = K.flatten(y_true)
     y_pred_f = K.flatten(y_pred)
     intersection = K.sum(y_true_f * y_pred_f)
-    return (2. * intersection + smooth) / (K.sum(y_true_f) + K.sum(y_pred_f) + smooth)
+    return (2. * intersection) / (K.sum(y_true_f) + K.sum(y_pred_f) + smooth)
 
 
 def dice_coef_loss(y_true, y_pred):
-    return -dice_coef(y_true, y_pred)
+    return 1. / (dice_coef(y_true, y_pred) + smooth_loss)
 
 
 def get_unet():
     inputs = Input((1, img_rows, img_cols))
-    conv1 = Convolution2D(32, 3, 3, activation='relu', border_mode='same')(inputs)
-    conv1 = Convolution2D(32, 3, 3, activation='relu', border_mode='same')(conv1)
+    #inputs = Dropout(0.2)(inputs)
+    conv1 = Convolution2D(64, 3, 3, activation='relu', init='lecun_uniform', W_constraint=maxnorm(3), border_mode='same')(inputs)
+    #conv1 = Dropout(0.5)(conv1)
+    conv1 = Convolution2D(64, 3, 3, activation='relu', init='lecun_uniform', W_constraint=maxnorm(3), border_mode='same')(conv1)
+    #conv1 = Dropout(0.5)(conv1)
     pool1 = MaxPooling2D(pool_size=(2, 2))(conv1)
 
-    conv2 = Convolution2D(64, 3, 3, activation='relu', border_mode='same')(pool1)
-    conv2 = Convolution2D(64, 3, 3, activation='relu', border_mode='same')(conv2)
+    conv2 = Convolution2D(128, 3, 3, activation='relu', init='lecun_uniform', W_constraint=maxnorm(3), border_mode='same')(pool1)
+    #conv2 = Dropout(0.5)(conv2)
+    conv2 = Convolution2D(128, 3, 3, activation='relu', init='lecun_uniform', W_constraint=maxnorm(3), border_mode='same')(conv2)
+    #conv2 = Dropout(0.5)(conv2)
     pool2 = MaxPooling2D(pool_size=(2, 2))(conv2)
 
-    conv3 = Convolution2D(128, 3, 3, activation='relu', border_mode='same')(pool2)
-    conv3 = Convolution2D(128, 3, 3, activation='relu', border_mode='same')(conv3)
+    conv3 = Convolution2D(256, 3, 3, activation='relu', init='lecun_uniform', W_constraint=maxnorm(3), border_mode='same')(pool2)
+    #conv3 = Dropout(0.5)(conv3)
+    conv3 = Convolution2D(256, 3, 3, activation='relu', init='lecun_uniform', W_constraint=maxnorm(3), border_mode='same')(conv3)
+    #conv3 = Dropout(0.5)(conv3)
     pool3 = MaxPooling2D(pool_size=(2, 2))(conv3)
 
-    conv4 = Convolution2D(256, 3, 3, activation='relu', border_mode='same')(pool3)
-    conv4 = Convolution2D(256, 3, 3, activation='relu', border_mode='same')(conv4)
+    conv4 = Convolution2D(512, 3, 3, activation='relu', init='lecun_uniform', W_constraint=maxnorm(3), border_mode='same')(pool3)
+    #conv4 = Dropout(0.5)(conv4)
+    conv4 = Convolution2D(512, 3, 3, activation='relu', init='lecun_uniform', W_constraint=maxnorm(3), border_mode='same')(conv4)
+    #conv4 = Dropout(0.5)(conv4)
     pool4 = MaxPooling2D(pool_size=(2, 2))(conv4)
 
-    conv5 = Convolution2D(512, 3, 3, activation='relu', border_mode='same')(pool4)
-    conv5 = Convolution2D(512, 3, 3, activation='relu', border_mode='same')(conv5)
+    conv5 = Convolution2D(1024, 3, 3, activation='relu', init='lecun_uniform', W_constraint=maxnorm(3), border_mode='same')(pool4)
+    conv5 = Dropout(0.5)(conv5)
+    conv5 = Convolution2D(1024, 3, 3, activation='relu', init='lecun_uniform', W_constraint=maxnorm(3), border_mode='same')(conv5)
+    conv5 = Dropout(0.5)(conv5)
+    pool5 = MaxPooling2D(pool_size=(2, 2))(conv5)
 
-    up6 = merge([UpSampling2D(size=(2, 2))(conv5), conv4], mode='concat', concat_axis=1)
-    conv6 = Convolution2D(256, 3, 3, activation='relu', border_mode='same')(up6)
-    conv6 = Convolution2D(256, 3, 3, activation='relu', border_mode='same')(conv6)
+    conv05 = Convolution2D(2048, 3, 3, activation='relu', init='lecun_uniform', W_constraint=maxnorm(3), border_mode='same')(pool5)
+    conv05 = Dropout(0.5)(conv05)
+    conv05 = Convolution2D(2048, 3, 3, activation='relu', init='lecun_uniform', W_constraint=maxnorm(3), border_mode='same')(conv05)
+    conv05 = Dropout(0.5)(conv05)
 
-    up7 = merge([UpSampling2D(size=(2, 2))(conv6), conv3], mode='concat', concat_axis=1)
-    conv7 = Convolution2D(128, 3, 3, activation='relu', border_mode='same')(up7)
-    conv7 = Convolution2D(128, 3, 3, activation='relu', border_mode='same')(conv7)
+    up6 = merge([UpSampling2D(size=(2, 2))(conv05), conv5], mode='concat', concat_axis=1)
+    conv6 = Convolution2D(1024, 3, 3, activation='relu', init='lecun_uniform', W_constraint=maxnorm(3), border_mode='same')(up6)
+    conv6 = Dropout(0.5)(conv6)
+    conv6 = Convolution2D(1024, 3, 3, activation='relu', init='lecun_uniform', W_constraint=maxnorm(3), border_mode='same')(conv6)
+    conv6 = Dropout(0.5)(conv6)
 
-    up8 = merge([UpSampling2D(size=(2, 2))(conv7), conv2], mode='concat', concat_axis=1)
-    conv8 = Convolution2D(64, 3, 3, activation='relu', border_mode='same')(up8)
-    conv8 = Convolution2D(64, 3, 3, activation='relu', border_mode='same')(conv8)
+    up7 = merge([UpSampling2D(size=(2, 2))(conv6), conv4], mode='concat', concat_axis=1)
+    conv7 = Convolution2D(512, 3, 3, activation='relu', init='lecun_uniform', W_constraint=maxnorm(3), border_mode='same')(up7)
+    #conv7 = Dropout(0.5)(conv7)
+    conv7 = Convolution2D(512, 3, 3, activation='relu', init='lecun_uniform', W_constraint=maxnorm(3), border_mode='same')(conv7)
+    #conv7 = Dropout(0.5)(conv7)
 
-    up9 = merge([UpSampling2D(size=(2, 2))(conv8), conv1], mode='concat', concat_axis=1)
-    conv9 = Convolution2D(32, 3, 3, activation='relu', border_mode='same')(up9)
-    conv9 = Convolution2D(32, 3, 3, activation='relu', border_mode='same')(conv9)
+    up8 = merge([UpSampling2D(size=(2, 2))(conv7), conv3], mode='concat', concat_axis=1)
+    conv8 = Convolution2D(256, 3, 3, activation='relu', init='lecun_uniform', W_constraint=maxnorm(3), border_mode='same')(up8)
+    #conv8 = Dropout(0.5)(conv8)
+    conv8 = Convolution2D(256, 3, 3, activation='relu', init='lecun_uniform', W_constraint=maxnorm(3), border_mode='same')(conv8)
+    #conv8 = Dropout(0.5)(conv8)
 
-    conv10 = Convolution2D(1, 1, 1, activation='sigmoid')(conv9)
+    up9 = merge([UpSampling2D(size=(2, 2))(conv8), conv2], mode='concat', concat_axis=1)
+    conv9 = Convolution2D(128, 3, 3, activation='relu', init='lecun_uniform', W_constraint=maxnorm(3), border_mode='same')(up9)
+    #conv9 = Dropout(0.5)(conv9)
+    conv9 = Convolution2D(128, 3, 3, activation='relu', init='lecun_uniform', W_constraint=maxnorm(3), border_mode='same')(conv9)
+    #conv9 = Dropout(0.5)(conv9)
+
+    up10 = merge([UpSampling2D(size=(2, 2))(conv9), conv1], mode='concat', concat_axis=1)
+    conv09 = Convolution2D(64, 3, 3, activation='relu', init='lecun_uniform', W_constraint=maxnorm(3), border_mode='same')(up10)
+    #conv9 = Dropout(0.5)(conv9)
+    conv09 = Convolution2D(64, 3, 3, activation='relu', init='lecun_uniform', W_constraint=maxnorm(3), border_mode='same')(conv09)
+    #conv9 = Dropout(0.5)(conv9)
+
+    conv10 = Convolution2D(1, 1, 1, activation='sigmoid')(conv09)
 
     model = Model(input=inputs, output=conv10)
 
-    model.compile(optimizer=Adam(lr=1e-5), loss=dice_coef_loss, metrics=[dice_coef])
+    model.compile(optimizer=Adadelta(lr=0.1, rho=0.95, epsilon=1e-08), loss=dice_coef_loss, metrics=[dice_coef])
+    #model.compile(optimizer=SGD(lr=0.1, momentum=0.9, decay=0.001, nesterov=False), loss=dice_coef_loss, metrics=[dice_coef])
+
+    #model.compile(optimizer=Nadam(lr=0.002, beta_1=0.9, beta_2=0.999, epsilon=1e-08, schedule_decay=0.004), loss=dice_coef_loss, metrics=[dice_coef])
 
     return model
 
@@ -76,11 +117,21 @@ def get_unet():
 def preprocess(imgs):
     imgs_p = np.ndarray((imgs.shape[0], imgs.shape[1], img_rows, img_cols), dtype=np.uint8)
     for i in range(imgs.shape[0]):
-        imgs_p[i, 0] = cv2.resize(imgs[i, 0], (img_cols, img_rows), interpolation=cv2.INTER_CUBIC)
+        imgs_p[i, 0]  = cv2.resize(imgs[i, 0], (img_cols, img_rows), interpolation=cv2.INTER_AREA)
+        #temp = temp.astype('float32')
+
+        #mean = np.mean(temp)
+        #std = np.std(temp)
+        #temp -= mean
+        #temp /= std
+
+        #imgs_p[i, 0] = temp
     return imgs_p
 
 
 def train_and_predict():
+    #K.set_learning_phase(1)
+    print(K.learning_phase())
     print('-'*30)
     print('Loading and preprocessing train data...')
     print('-'*30)
@@ -103,14 +154,28 @@ def train_and_predict():
     print('Creating and compiling model...')
     print('-'*30)
     model = get_unet()
+    plot(model, to_file='model.png', show_shapes=True)
     model_checkpoint = ModelCheckpoint('unet.hdf5', monitor='loss', save_best_only=True)
 
     print('-'*30)
     print('Fitting model...')
     print('-'*30)
-    model.fit(imgs_train, imgs_mask_train, batch_size=32, nb_epoch=20, verbose=1, shuffle=True,
-              callbacks=[model_checkpoint])
+    datagen = ImageDataGenerator(
+            rotation_range=5,
+            vertical_flip=True,
+            horizontal_flip=True,
+            )
+    #datagen.fit(imgs_train)
+    #model.load_weights('unet.hdf5')
+    model.fit_generator(datagen.flow(imgs_train, imgs_mask_train, batch_size=32, shuffle=True),
+            samples_per_epoch=len(imgs_train), nb_epoch=120, verbose=1, callbacks=[model_checkpoint])
 
+    '''
+    model.fit(imgs_train, imgs_mask_train, batch_size=32, nb_epoch=120, verbose=1, shuffle=True,
+              callbacks=[model_checkpoint])
+    '''
+
+    #K.set_learning_phase(0)
     print('-'*30)
     print('Loading and preprocessing test data...')
     print('-'*30)
@@ -129,8 +194,10 @@ def train_and_predict():
     print('-'*30)
     print('Predicting masks on test data...')
     print('-'*30)
+    print(K.learning_phase())
     imgs_mask_test = model.predict(imgs_test, verbose=1)
     np.save('imgs_mask_test.npy', imgs_mask_test)
+    print(imgs_mask_test.shape)
 
 
 if __name__ == '__main__':
