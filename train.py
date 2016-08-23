@@ -16,11 +16,8 @@ from data import load_train_data, load_test_data
 
 img_rows = 64
 img_cols = 96
-#img_rows = 208
-#img_cols = 288
 
-smooth = 1.
-smooth_loss = 1. 
+smooth = 1. 
 
 
 def dice_coef(y_true, y_pred):
@@ -31,34 +28,25 @@ def dice_coef(y_true, y_pred):
 
 
 def dice_coef_loss(y_true, y_pred):
-    return 1. / (dice_coef(y_true, y_pred) + smooth_loss)
+    return 1. / (dice_coef(y_true, y_pred) + smooth)
 
 
 def get_unet():
     inputs = Input((1, img_rows, img_cols))
-    #inputs = Dropout(0.2)(inputs)
     conv1 = Convolution2D(64, 3, 3, activation='relu', init='lecun_uniform', W_constraint=maxnorm(3), border_mode='same')(inputs)
-    #conv1 = Dropout(0.5)(conv1)
     conv1 = Convolution2D(64, 3, 3, activation='relu', init='lecun_uniform', W_constraint=maxnorm(3), border_mode='same')(conv1)
-    #conv1 = Dropout(0.5)(conv1)
     pool1 = MaxPooling2D(pool_size=(2, 2))(conv1)
 
     conv2 = Convolution2D(128, 3, 3, activation='relu', init='lecun_uniform', W_constraint=maxnorm(3), border_mode='same')(pool1)
-    #conv2 = Dropout(0.5)(conv2)
     conv2 = Convolution2D(128, 3, 3, activation='relu', init='lecun_uniform', W_constraint=maxnorm(3), border_mode='same')(conv2)
-    #conv2 = Dropout(0.5)(conv2)
     pool2 = MaxPooling2D(pool_size=(2, 2))(conv2)
 
     conv3 = Convolution2D(256, 3, 3, activation='relu', init='lecun_uniform', W_constraint=maxnorm(3), border_mode='same')(pool2)
-    #conv3 = Dropout(0.5)(conv3)
     conv3 = Convolution2D(256, 3, 3, activation='relu', init='lecun_uniform', W_constraint=maxnorm(3), border_mode='same')(conv3)
-    #conv3 = Dropout(0.5)(conv3)
     pool3 = MaxPooling2D(pool_size=(2, 2))(conv3)
 
     conv4 = Convolution2D(512, 3, 3, activation='relu', init='lecun_uniform', W_constraint=maxnorm(3), border_mode='same')(pool3)
-    #conv4 = Dropout(0.5)(conv4)
     conv4 = Convolution2D(512, 3, 3, activation='relu', init='lecun_uniform', W_constraint=maxnorm(3), border_mode='same')(conv4)
-    #conv4 = Dropout(0.5)(conv4)
     pool4 = MaxPooling2D(pool_size=(2, 2))(conv4)
 
     conv5 = Convolution2D(1024, 3, 3, activation='relu', init='lecun_uniform', W_constraint=maxnorm(3), border_mode='same')(pool4)
@@ -80,36 +68,25 @@ def get_unet():
 
     up7 = merge([UpSampling2D(size=(2, 2))(conv6), conv4], mode='concat', concat_axis=1)
     conv7 = Convolution2D(512, 3, 3, activation='relu', init='lecun_uniform', W_constraint=maxnorm(3), border_mode='same')(up7)
-    #conv7 = Dropout(0.5)(conv7)
     conv7 = Convolution2D(512, 3, 3, activation='relu', init='lecun_uniform', W_constraint=maxnorm(3), border_mode='same')(conv7)
-    #conv7 = Dropout(0.5)(conv7)
 
     up8 = merge([UpSampling2D(size=(2, 2))(conv7), conv3], mode='concat', concat_axis=1)
     conv8 = Convolution2D(256, 3, 3, activation='relu', init='lecun_uniform', W_constraint=maxnorm(3), border_mode='same')(up8)
-    #conv8 = Dropout(0.5)(conv8)
     conv8 = Convolution2D(256, 3, 3, activation='relu', init='lecun_uniform', W_constraint=maxnorm(3), border_mode='same')(conv8)
-    #conv8 = Dropout(0.5)(conv8)
 
     up9 = merge([UpSampling2D(size=(2, 2))(conv8), conv2], mode='concat', concat_axis=1)
     conv9 = Convolution2D(128, 3, 3, activation='relu', init='lecun_uniform', W_constraint=maxnorm(3), border_mode='same')(up9)
-    #conv9 = Dropout(0.5)(conv9)
     conv9 = Convolution2D(128, 3, 3, activation='relu', init='lecun_uniform', W_constraint=maxnorm(3), border_mode='same')(conv9)
-    #conv9 = Dropout(0.5)(conv9)
 
     up10 = merge([UpSampling2D(size=(2, 2))(conv9), conv1], mode='concat', concat_axis=1)
     conv09 = Convolution2D(64, 3, 3, activation='relu', init='lecun_uniform', W_constraint=maxnorm(3), border_mode='same')(up10)
-    #conv9 = Dropout(0.5)(conv9)
     conv09 = Convolution2D(64, 3, 3, activation='relu', init='lecun_uniform', W_constraint=maxnorm(3), border_mode='same')(conv09)
-    #conv9 = Dropout(0.5)(conv9)
 
     conv10 = Convolution2D(1, 1, 1, activation='sigmoid')(conv09)
 
     model = Model(input=inputs, output=conv10)
 
     model.compile(optimizer=Adadelta(lr=0.1, rho=0.95, epsilon=1e-08), loss=dice_coef_loss, metrics=[dice_coef])
-    #model.compile(optimizer=SGD(lr=0.1, momentum=0.9, decay=0.001, nesterov=False), loss=dice_coef_loss, metrics=[dice_coef])
-
-    #model.compile(optimizer=Nadam(lr=0.002, beta_1=0.9, beta_2=0.999, epsilon=1e-08, schedule_decay=0.004), loss=dice_coef_loss, metrics=[dice_coef])
 
     return model
 
@@ -118,20 +95,10 @@ def preprocess(imgs):
     imgs_p = np.ndarray((imgs.shape[0], imgs.shape[1], img_rows, img_cols), dtype=np.uint8)
     for i in range(imgs.shape[0]):
         imgs_p[i, 0]  = cv2.resize(imgs[i, 0], (img_cols, img_rows), interpolation=cv2.INTER_AREA)
-        #temp = temp.astype('float32')
-
-        #mean = np.mean(temp)
-        #std = np.std(temp)
-        #temp -= mean
-        #temp /= std
-
-        #imgs_p[i, 0] = temp
     return imgs_p
 
 
 def train_and_predict():
-    #K.set_learning_phase(1)
-    print(K.learning_phase())
     print('-'*30)
     print('Loading and preprocessing train data...')
     print('-'*30)
@@ -165,17 +132,10 @@ def train_and_predict():
             vertical_flip=True,
             horizontal_flip=True,
             )
-    #datagen.fit(imgs_train)
-    #model.load_weights('unet.hdf5')
     model.fit_generator(datagen.flow(imgs_train, imgs_mask_train, batch_size=32, shuffle=True),
             samples_per_epoch=len(imgs_train), nb_epoch=120, verbose=1, callbacks=[model_checkpoint])
 
-    '''
-    model.fit(imgs_train, imgs_mask_train, batch_size=32, nb_epoch=120, verbose=1, shuffle=True,
-              callbacks=[model_checkpoint])
-    '''
 
-    #K.set_learning_phase(0)
     print('-'*30)
     print('Loading and preprocessing test data...')
     print('-'*30)
@@ -194,10 +154,8 @@ def train_and_predict():
     print('-'*30)
     print('Predicting masks on test data...')
     print('-'*30)
-    print(K.learning_phase())
     imgs_mask_test = model.predict(imgs_test, verbose=1)
     np.save('imgs_mask_test.npy', imgs_mask_test)
-    print(imgs_mask_test.shape)
 
 
 if __name__ == '__main__':
