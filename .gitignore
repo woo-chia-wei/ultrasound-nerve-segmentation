@@ -4,3 +4,4 @@
 *.hdf5
 raw/
 .ipynb_checkpoints/
+playground*

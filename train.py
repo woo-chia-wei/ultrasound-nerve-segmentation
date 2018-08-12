@@ -1,24 +1,22 @@
-    from __future__ import print_function
+from __future__ import print_function
 
-    import cv2
-    import numpy as np
-    from keras.models import Model
-    from keras.layers import Input, merge, Convolution2D, MaxPooling2D, UpSampling2D, concatenate
-    from keras.layers.core import Dropout
-    from keras.optimizers import *
-    from keras.constraints import maxnorm
-    from keras.callbacks import ModelCheckpoint, LearningRateScheduler
-    from keras import backend as K
-    from keras.utils.vis_utils import plot_model
-    from ImageDataGenerator import ImageDataGenerator
+import cv2
+import numpy as np
+import os
+from keras.models import Model
+from keras.layers import Input, Convolution2D, MaxPooling2D, UpSampling2D, concatenate
+from keras.layers.core import Dropout
+from keras.optimizers import Adadelta, SGD
+from keras.constraints import maxnorm
+from keras.callbacks import ModelCheckpoint
+from keras import backend as K
+from ImageDataGenerator import ImageDataGenerator
+from data import load_train_data, load_test_data
 
-    from data import load_train_data, load_test_data
-
-    img_rows = 64
-    img_cols = 96
-
-    smooth = 1. 
-
+img_rows = 64
+img_cols = 96
+smooth = 1
+model_filename = 'unet.hdf5'
 
 def dice_coef(y_true, y_pred):
     y_true_f = K.flatten(y_true)
@@ -85,7 +83,7 @@ def get_unet():
 
     model = Model(inputs=inputs, outputs=conv10)
 
-    model.compile(optimizer=Adadelta(lr=0.1, rho=0.95, epsilon=1e-08), loss=dice_coef_loss, metrics=[dice_coef])
+    model.compile(optimizer=Adadelta(), loss=dice_coef_loss, metrics=[dice_coef])
 
     return model
 
@@ -124,24 +122,32 @@ def train_and_predict():
     print('Creating and compiling model...')
     print('-'*30)
     model = get_unet()
-    model_checkpoint = ModelCheckpoint('unet.hdf5', monitor='loss', save_best_only=True)
+    model_checkpoint = ModelCheckpoint(model_filename, monitor='loss', save_best_only=True)
+    if(os.path.exists(model_filename)):
+        model.load_weights(model_filename)
 
     print('-'*30)
     print('Fitting model...')
     print('-'*30)
     datagen = ImageDataGenerator(
-            rotation_range=5,
-            vertical_flip=True,
-            horizontal_flip=True,
-            )
-    model.fit_generator(datagen.flow(swap_axes(imgs_train), imgs_mask_train, batch_size=32, shuffle=True),
-        steps_per_epoch=len(imgs_train), epochs=2, verbose=1, callbacks=[model_checkpoint])
+                rotation_range=5,
+                vertical_flip=True,
+                horizontal_flip=True,
+                )
 
+    batch_size = 32
+    steps_per_epoch = (int)(len(imgs_train)/batch_size)
+    epochs = 120
+    model.fit_generator(datagen.flow(swap_axes(imgs_train), imgs_mask_train, batch_size=batch_size, shuffle=True),
+                        steps_per_epoch=steps_per_epoch, 
+                        epochs=epochs, 
+                        verbose=1, 
+                        callbacks=[model_checkpoint])
 
     print('-'*30)
     print('Loading and preprocessing test data...')
     print('-'*30)
-    imgs_test, imgs_id_test = load_test_data()
+    imgs_test, imgs_mask_test = load_test_data()
     imgs_test = preprocess(imgs_test)
 
     imgs_test = imgs_test.astype('float32')
@@ -151,13 +157,13 @@ def train_and_predict():
     print('-'*30)
     print('Loading saved weights...')
     print('-'*30)
-    model.load_weights('unet.hdf5')
+    model.load_weights(model_filename)
 
     print('-'*30)
     print('Predicting masks on test data...')
     print('-'*30)
-    imgs_mask_test = model.predict(swap_axes(imgs_test[:10]),  verbose=1)
-    np.save('imgs_mask_test.npy', imgs_mask_test)
+    imgs_mask_test_pred = model.predict(swap_axes(imgs_test),  verbose=1)
+    np.save('imgs_mask_test_prediction.npy', imgs_mask_test_pred)
 
 
 if __name__ == '__main__':
