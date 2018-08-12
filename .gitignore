@@ -2,3 +2,5 @@
 *.npy
 *.csv
 *.hdf5
+raw/
+.ipynb_checkpoints/
