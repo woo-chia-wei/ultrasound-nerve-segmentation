@@ -8,8 +8,9 @@ from sklearn.model_selection import train_test_split
 data_path = 'raw/'
 image_rows = 420
 image_cols = 580
+split_ratio = 0.2
 
-def create_train_and_test_data():
+def create_train_validation_test_data():
     # Read raw dataset
     print(datetime.datetime.now(), 'Reading all raw files...')
     train_data_path = os.path.join(data_path, 'train')
@@ -40,11 +41,19 @@ def create_train_and_test_data():
     data = pd.DataFrame(image_data)
     data.set_index('name', inplace=True)
 
-    # Stratified Smapling
-    print(datetime.datetime.now(), 'Perform stratified sampling into train-test datasets (70%-30%)...')
+    # Stratified Sampling
+    print(datetime.datetime.now(), 'Perform stratified sampling into train-validation-test datasets (64%-16%-20%)...')
     X = data
     y = data['is_found']
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, stratify=y, random_state=42)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, 
+												    	test_size=split_ratio, 
+												    	stratify=X['is_found'], 
+												    	random_state=42)
+
+    X_train, X_validation, y_train, y_validation = train_test_split(X_train, y_train, 
+	                                                                test_size=split_ratio, 
+	                                                                stratify=X_train['is_found'], 
+	                                                                random_state=42)
 
     X_train_new = X_train.copy()
     X_train_new['type']='train'
@@ -54,8 +63,12 @@ def create_train_and_test_data():
     X_test_new['type']='test'
     X_test = X_test_new
 
+    X_validation_new = X_validation.copy()
+    X_validation_new['type']='validation'
+    X_validation = X_validation_new
+
     # Construct full set of train-test data
-    data = pd.concat([X_train, X_test], axis='index')
+    data = pd.concat([X_train, X_test, X_validation], axis='index')
 
     # Split into train-set feature-target dataset
     print(datetime.datetime.now(), 'Converting images data into numpy arrays...')
@@ -63,6 +76,8 @@ def create_train_and_test_data():
     y_train = create_image_arrays('mask_image_name', 'train', data)
     X_test = create_image_arrays('image_name', 'test', data)
     y_test = create_image_arrays('mask_image_name', 'test', data)
+    X_validation = create_image_arrays('image_name', 'validation', data)
+    y_validation = create_image_arrays('mask_image_name', 'validation', data)
 
     # Save to local np arrays
     print(datetime.datetime.now(), 'Save all numpy array to local npy files...')
@@ -70,6 +85,8 @@ def create_train_and_test_data():
     np.save('imgs_mask_train.npy', y_train)
     np.save('imgs_test.npy', X_test)
     np.save('imgs_mask_test.npy', y_test)
+    np.save('imgs_validation.npy', X_validation)
+    np.save('imgs_mask_validation.npy', y_validation)
 
     print(datetime.datetime.now(), 'The code was executed successfully.')
 
@@ -97,5 +114,10 @@ def load_test_data():
     imgs_mask_test = np.load('imgs_mask_test.npy')
     return imgs_test, imgs_mask_test
 
+def load_validation_data():
+    imgs_validation = np.load('imgs_validation.npy')
+    imgs_mask_validation = np.load('imgs_mask_validation.npy')
+    return imgs_validation, imgs_mask_validation
+
 if __name__ == '__main__':
-    create_train_and_test_data()
+    create_train_validation_test_data()
