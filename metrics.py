@@ -1,10 +1,5 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Aug 19 19:00:00 2018
-
 @author: Lily
 """
-
 from keras.losses import binary_crossentropy
 from keras import backend as K
 from sklearn.metrics import jaccard_similarity_score
