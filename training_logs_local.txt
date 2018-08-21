@@ -7,7 +7,7 @@
 ### Momentum        =     0.4,    0.45,    0.45,    0.45,    0.45,    0.45,
 ### dropout         =     0.1,    0.05,    0.05,    0.05,    0.05,    0.05,
 ### epochs          =     100,     100,     100,     100,     100,     100,
-### best            = 0.13699, 0.38844, 0.48507, 0.54015, 0.58077,
+### best            = 0.13699, 0.38844, 0.48507, 0.54015, 0.58077, 0.60995
 ###############################################################################
 
 Epoch 1/100
@@ -2014,3 +2014,404 @@ Epoch 500/500
 28/28 [==============================] - 48s 2s/step - loss: -0.5677 - dice_coef: 0.7234 - jacc_coef: 0.5677 - val_loss: -0.4089 - val_dice_coef: 0.5799 - val_jacc_coef: 0.4089
 
 Epoch 00500: loss did not improve from -0.58077
+
+Epoch 501/600
+28/28 [==============================] - 52s 2s/step - loss: -0.5715 - dice_coef: 0.7262 - jacc_coef: 0.5715 - val_loss: -0.4018 - val_dice_coef: 0.5728 - val_jacc_coef: 0.4018
+
+Epoch 00501: loss improved from inf to -0.56872, saving model to unet.hdf5
+Epoch 502/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5543 - dice_coef: 0.7125 - jacc_coef: 0.5543 - val_loss: -0.4048 - val_dice_coef: 0.5758 - val_jacc_coef: 0.4048
+
+Epoch 00502: loss did not improve from -0.56872
+Epoch 503/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5673 - dice_coef: 0.7226 - jacc_coef: 0.5673 - val_loss: -0.3976 - val_dice_coef: 0.5682 - val_jacc_coef: 0.3976
+
+Epoch 00503: loss improved from -0.56872 to -0.57072, saving model to unet.hdf5
+Epoch 504/600
+28/28 [==============================] - 51s 2s/step - loss: -0.5685 - dice_coef: 0.7243 - jacc_coef: 0.5685 - val_loss: -0.4038 - val_dice_coef: 0.5711 - val_jacc_coef: 0.4038
+
+Epoch 00504: loss did not improve from -0.57072
+Epoch 505/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5688 - dice_coef: 0.7241 - jacc_coef: 0.5688 - val_loss: -0.3931 - val_dice_coef: 0.5636 - val_jacc_coef: 0.3931
+
+Epoch 00505: loss did not improve from -0.57072
+Epoch 506/600
+28/28 [==============================] - 49s 2s/step - loss: -0.5754 - dice_coef: 0.7300 - jacc_coef: 0.5754 - val_loss: -0.4082 - val_dice_coef: 0.5791 - val_jacc_coef: 0.4082
+
+Epoch 00506: loss improved from -0.57072 to -0.57539, saving model to unet.hdf5
+Epoch 507/600
+28/28 [==============================] - 47s 2s/step - loss: -0.5808 - dice_coef: 0.7343 - jacc_coef: 0.5808 - val_loss: -0.4143 - val_dice_coef: 0.5854 - val_jacc_coef: 0.4143
+
+Epoch 00507: loss improved from -0.57539 to -0.58164, saving model to unet.hdf5
+Epoch 508/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5659 - dice_coef: 0.7220 - jacc_coef: 0.5659 - val_loss: -0.3956 - val_dice_coef: 0.5661 - val_jacc_coef: 0.3956
+
+Epoch 00508: loss did not improve from -0.58164
+Epoch 509/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5808 - dice_coef: 0.7340 - jacc_coef: 0.5808 - val_loss: -0.3997 - val_dice_coef: 0.5704 - val_jacc_coef: 0.3997
+
+Epoch 00509: loss did not improve from -0.58164
+Epoch 510/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5710 - dice_coef: 0.7266 - jacc_coef: 0.5710 - val_loss: -0.4026 - val_dice_coef: 0.5733 - val_jacc_coef: 0.4026
+
+Epoch 00510: loss did not improve from -0.58164
+Epoch 511/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5684 - dice_coef: 0.7239 - jacc_coef: 0.5684 - val_loss: -0.4100 - val_dice_coef: 0.5808 - val_jacc_coef: 0.4100
+
+Epoch 00511: loss did not improve from -0.58164
+Epoch 512/600
+28/28 [==============================] - 49s 2s/step - loss: -0.5771 - dice_coef: 0.7314 - jacc_coef: 0.5771 - val_loss: -0.3830 - val_dice_coef: 0.5531 - val_jacc_coef: 0.3830
+
+Epoch 00512: loss did not improve from -0.58164
+Epoch 513/600
+28/28 [==============================] - 47s 2s/step - loss: -0.5691 - dice_coef: 0.7246 - jacc_coef: 0.5691 - val_loss: -0.3913 - val_dice_coef: 0.5621 - val_jacc_coef: 0.3913
+
+Epoch 00513: loss did not improve from -0.58164
+Epoch 514/600
+28/28 [==============================] - 49s 2s/step - loss: -0.5659 - dice_coef: 0.7221 - jacc_coef: 0.5659 - val_loss: -0.3973 - val_dice_coef: 0.5683 - val_jacc_coef: 0.3973
+
+Epoch 00514: loss did not improve from -0.58164
+Epoch 515/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5774 - dice_coef: 0.7308 - jacc_coef: 0.5774 - val_loss: -0.4006 - val_dice_coef: 0.5715 - val_jacc_coef: 0.4006
+
+Epoch 00515: loss did not improve from -0.58164
+Epoch 516/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5794 - dice_coef: 0.7328 - jacc_coef: 0.5794 - val_loss: -0.4047 - val_dice_coef: 0.5758 - val_jacc_coef: 0.4047
+
+Epoch 00516: loss did not improve from -0.58164
+Epoch 517/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5718 - dice_coef: 0.7271 - jacc_coef: 0.5718 - val_loss: -0.3964 - val_dice_coef: 0.5672 - val_jacc_coef: 0.3964
+
+Epoch 00517: loss did not improve from -0.58164
+Epoch 518/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5686 - dice_coef: 0.7241 - jacc_coef: 0.5686 - val_loss: -0.4029 - val_dice_coef: 0.5738 - val_jacc_coef: 0.4029
+
+Epoch 00518: loss did not improve from -0.58164
+Epoch 519/600
+28/28 [==============================] - 47s 2s/step - loss: -0.5741 - dice_coef: 0.7285 - jacc_coef: 0.5741 - val_loss: -0.4047 - val_dice_coef: 0.5756 - val_jacc_coef: 0.4047
+
+Epoch 00519: loss did not improve from -0.58164
+Epoch 520/600
+28/28 [==============================] - 49s 2s/step - loss: -0.5672 - dice_coef: 0.7233 - jacc_coef: 0.5672 - val_loss: -0.4010 - val_dice_coef: 0.5719 - val_jacc_coef: 0.4010
+
+Epoch 00520: loss did not improve from -0.58164
+Epoch 521/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5868 - dice_coef: 0.7388 - jacc_coef: 0.5868 - val_loss: -0.4013 - val_dice_coef: 0.5721 - val_jacc_coef: 0.4013
+
+Epoch 00521: loss improved from -0.58164 to -0.58686, saving model to unet.hdf5
+Epoch 522/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5814 - dice_coef: 0.7345 - jacc_coef: 0.5814 - val_loss: -0.3991 - val_dice_coef: 0.5699 - val_jacc_coef: 0.3991
+
+Epoch 00522: loss did not improve from -0.58686
+Epoch 523/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5823 - dice_coef: 0.7354 - jacc_coef: 0.5823 - val_loss: -0.4090 - val_dice_coef: 0.5798 - val_jacc_coef: 0.4090
+
+Epoch 00523: loss did not improve from -0.58686
+Epoch 524/600
+28/28 [==============================] - 50s 2s/step - loss: -0.5796 - dice_coef: 0.7330 - jacc_coef: 0.5796 - val_loss: -0.3884 - val_dice_coef: 0.5549 - val_jacc_coef: 0.3884
+
+Epoch 00524: loss did not improve from -0.58686
+Epoch 525/600
+28/28 [==============================] - 49s 2s/step - loss: -0.5897 - dice_coef: 0.7412 - jacc_coef: 0.5897 - val_loss: -0.3895 - val_dice_coef: 0.5600 - val_jacc_coef: 0.3895
+
+Epoch 00525: loss improved from -0.58686 to -0.58968, saving model to unet.hdf5
+Epoch 526/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5826 - dice_coef: 0.7349 - jacc_coef: 0.5826 - val_loss: -0.4076 - val_dice_coef: 0.5787 - val_jacc_coef: 0.4076
+
+Epoch 00526: loss did not improve from -0.58968
+Epoch 527/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5803 - dice_coef: 0.7340 - jacc_coef: 0.5803 - val_loss: -0.4011 - val_dice_coef: 0.5721 - val_jacc_coef: 0.4011
+
+Epoch 00527: loss did not improve from -0.58968
+Epoch 528/600
+28/28 [==============================] - 50s 2s/step - loss: -0.5859 - dice_coef: 0.7383 - jacc_coef: 0.5859 - val_loss: -0.3841 - val_dice_coef: 0.5503 - val_jacc_coef: 0.3841
+
+Epoch 00528: loss did not improve from -0.58968
+Epoch 529/600
+28/28 [==============================] - 49s 2s/step - loss: -0.5750 - dice_coef: 0.7294 - jacc_coef: 0.5750 - val_loss: -0.3971 - val_dice_coef: 0.5679 - val_jacc_coef: 0.3971
+
+Epoch 00529: loss did not improve from -0.58968
+Epoch 530/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5833 - dice_coef: 0.7357 - jacc_coef: 0.5833 - val_loss: -0.3986 - val_dice_coef: 0.5695 - val_jacc_coef: 0.3986
+
+Epoch 00530: loss did not improve from -0.58968
+Epoch 531/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5849 - dice_coef: 0.7374 - jacc_coef: 0.5849 - val_loss: -0.4065 - val_dice_coef: 0.5774 - val_jacc_coef: 0.4065
+
+Epoch 00531: loss did not improve from -0.58968
+Epoch 532/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5746 - dice_coef: 0.7289 - jacc_coef: 0.5746 - val_loss: -0.3963 - val_dice_coef: 0.5671 - val_jacc_coef: 0.3963
+
+Epoch 00532: loss did not improve from -0.58968
+Epoch 533/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5841 - dice_coef: 0.7369 - jacc_coef: 0.5841 - val_loss: -0.3963 - val_dice_coef: 0.5670 - val_jacc_coef: 0.3963
+
+Epoch 00533: loss did not improve from -0.58968
+Epoch 534/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5805 - dice_coef: 0.7338 - jacc_coef: 0.5805 - val_loss: -0.3948 - val_dice_coef: 0.5654 - val_jacc_coef: 0.3948
+
+Epoch 00534: loss did not improve from -0.58968
+Epoch 535/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5907 - dice_coef: 0.7423 - jacc_coef: 0.5907 - val_loss: -0.4016 - val_dice_coef: 0.5724 - val_jacc_coef: 0.4016
+
+Epoch 00535: loss improved from -0.58968 to -0.59055, saving model to unet.hdf5
+Epoch 536/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5919 - dice_coef: 0.7431 - jacc_coef: 0.5919 - val_loss: -0.3919 - val_dice_coef: 0.5625 - val_jacc_coef: 0.3919
+
+Epoch 00536: loss improved from -0.59055 to -0.59210, saving model to unet.hdf5
+Epoch 537/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5833 - dice_coef: 0.7363 - jacc_coef: 0.5833 - val_loss: -0.4064 - val_dice_coef: 0.5774 - val_jacc_coef: 0.4064
+
+Epoch 00537: loss did not improve from -0.59210
+Epoch 538/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5875 - dice_coef: 0.7388 - jacc_coef: 0.5875 - val_loss: -0.4022 - val_dice_coef: 0.5728 - val_jacc_coef: 0.4022
+
+Epoch 00538: loss did not improve from -0.59210
+Epoch 539/600
+28/28 [==============================] - 49s 2s/step - loss: -0.5937 - dice_coef: 0.7444 - jacc_coef: 0.5937 - val_loss: -0.4018 - val_dice_coef: 0.5729 - val_jacc_coef: 0.4018
+
+Epoch 00539: loss improved from -0.59210 to -0.59366, saving model to unet.hdf5
+Epoch 540/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5864 - dice_coef: 0.7384 - jacc_coef: 0.5864 - val_loss: -0.4016 - val_dice_coef: 0.5727 - val_jacc_coef: 0.4016
+
+Epoch 00540: loss did not improve from -0.59366
+Epoch 541/600
+28/28 [==============================] - 47s 2s/step - loss: -0.5761 - dice_coef: 0.7303 - jacc_coef: 0.5761 - val_loss: -0.3905 - val_dice_coef: 0.5612 - val_jacc_coef: 0.3905
+
+Epoch 00541: loss did not improve from -0.59366
+Epoch 542/600
+28/28 [==============================] - 49s 2s/step - loss: -0.5805 - dice_coef: 0.7341 - jacc_coef: 0.5805 - val_loss: -0.4078 - val_dice_coef: 0.5789 - val_jacc_coef: 0.4078
+
+Epoch 00542: loss did not improve from -0.59366
+Epoch 543/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5857 - dice_coef: 0.7361 - jacc_coef: 0.5857 - val_loss: -0.3980 - val_dice_coef: 0.5691 - val_jacc_coef: 0.3980
+
+Epoch 00543: loss improved from -0.59366 to -0.59429, saving model to unet.hdf5
+Epoch 544/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5895 - dice_coef: 0.7404 - jacc_coef: 0.5895 - val_loss: -0.4049 - val_dice_coef: 0.5760 - val_jacc_coef: 0.4049
+
+Epoch 00544: loss did not improve from -0.59429
+Epoch 545/600
+28/28 [==============================] - 47s 2s/step - loss: -0.5773 - dice_coef: 0.7310 - jacc_coef: 0.5773 - val_loss: -0.3876 - val_dice_coef: 0.5580 - val_jacc_coef: 0.3876
+
+Epoch 00545: loss did not improve from -0.59429
+Epoch 546/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5903 - dice_coef: 0.7417 - jacc_coef: 0.5903 - val_loss: -0.3942 - val_dice_coef: 0.5647 - val_jacc_coef: 0.3942
+
+Epoch 00546: loss did not improve from -0.59429
+Epoch 547/600
+28/28 [==============================] - 49s 2s/step - loss: -0.6100 - dice_coef: 0.7572 - jacc_coef: 0.6100 - val_loss: -0.3972 - val_dice_coef: 0.5678 - val_jacc_coef: 0.3972
+
+Epoch 00547: loss improved from -0.59429 to -0.60995, saving model to unet.hdf5
+Epoch 548/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5703 - dice_coef: 0.7252 - jacc_coef: 0.5703 - val_loss: -0.3894 - val_dice_coef: 0.5598 - val_jacc_coef: 0.3894
+
+Epoch 00548: loss did not improve from -0.60995
+Epoch 549/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5872 - dice_coef: 0.7393 - jacc_coef: 0.5872 - val_loss: -0.3904 - val_dice_coef: 0.5611 - val_jacc_coef: 0.3904
+
+Epoch 00549: loss did not improve from -0.60995
+Epoch 550/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5869 - dice_coef: 0.7385 - jacc_coef: 0.5869 - val_loss: -0.3819 - val_dice_coef: 0.5521 - val_jacc_coef: 0.3819
+
+Epoch 00550: loss did not improve from -0.60995
+Epoch 551/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5842 - dice_coef: 0.7368 - jacc_coef: 0.5842 - val_loss: -0.3913 - val_dice_coef: 0.5619 - val_jacc_coef: 0.3913
+
+Epoch 00551: loss did not improve from -0.60995
+Epoch 552/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5807 - dice_coef: 0.7340 - jacc_coef: 0.5807 - val_loss: -0.3973 - val_dice_coef: 0.5681 - val_jacc_coef: 0.3973
+
+Epoch 00552: loss did not improve from -0.60995
+Epoch 553/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5805 - dice_coef: 0.7341 - jacc_coef: 0.5805 - val_loss: -0.3944 - val_dice_coef: 0.5652 - val_jacc_coef: 0.3944
+
+Epoch 00553: loss did not improve from -0.60995
+Epoch 554/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5876 - dice_coef: 0.7395 - jacc_coef: 0.5876 - val_loss: -0.4022 - val_dice_coef: 0.5732 - val_jacc_coef: 0.4022
+
+Epoch 00554: loss did not improve from -0.60995
+Epoch 555/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5915 - dice_coef: 0.7428 - jacc_coef: 0.5915 - val_loss: -0.4043 - val_dice_coef: 0.5750 - val_jacc_coef: 0.4043
+
+Epoch 00555: loss did not improve from -0.60995
+Epoch 556/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5875 - dice_coef: 0.7391 - jacc_coef: 0.5875 - val_loss: -0.3856 - val_dice_coef: 0.5558 - val_jacc_coef: 0.3856
+
+Epoch 00556: loss did not improve from -0.60995
+Epoch 557/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5799 - dice_coef: 0.7330 - jacc_coef: 0.5799 - val_loss: -0.3933 - val_dice_coef: 0.5637 - val_jacc_coef: 0.3933
+
+Epoch 00557: loss did not improve from -0.60995
+Epoch 558/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5826 - dice_coef: 0.7358 - jacc_coef: 0.5826 - val_loss: -0.3996 - val_dice_coef: 0.5702 - val_jacc_coef: 0.3996
+
+Epoch 00558: loss did not improve from -0.60995
+Epoch 559/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5959 - dice_coef: 0.7463 - jacc_coef: 0.5959 - val_loss: -0.3899 - val_dice_coef: 0.5603 - val_jacc_coef: 0.3899
+
+Epoch 00559: loss did not improve from -0.60995
+Epoch 560/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5872 - dice_coef: 0.7392 - jacc_coef: 0.5872 - val_loss: -0.4019 - val_dice_coef: 0.5728 - val_jacc_coef: 0.4019
+
+Epoch 00560: loss did not improve from -0.60995
+Epoch 561/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5850 - dice_coef: 0.7374 - jacc_coef: 0.5850 - val_loss: -0.3899 - val_dice_coef: 0.5605 - val_jacc_coef: 0.3899
+
+Epoch 00561: loss did not improve from -0.60995
+Epoch 562/600
+28/28 [==============================] - 51s 2s/step - loss: -0.6033 - dice_coef: 0.7518 - jacc_coef: 0.6033 - val_loss: -0.3854 - val_dice_coef: 0.5514 - val_jacc_coef: 0.3854
+
+Epoch 00562: loss did not improve from -0.60995
+Epoch 563/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5890 - dice_coef: 0.7408 - jacc_coef: 0.5890 - val_loss: -0.3828 - val_dice_coef: 0.5530 - val_jacc_coef: 0.3828
+
+Epoch 00563: loss did not improve from -0.60995
+Epoch 564/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5941 - dice_coef: 0.7446 - jacc_coef: 0.5941 - val_loss: -0.3946 - val_dice_coef: 0.5654 - val_jacc_coef: 0.3946
+
+Epoch 00564: loss did not improve from -0.60995
+Epoch 565/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5798 - dice_coef: 0.7315 - jacc_coef: 0.5798 - val_loss: -0.3930 - val_dice_coef: 0.5638 - val_jacc_coef: 0.3930
+
+Epoch 00565: loss did not improve from -0.60995
+Epoch 566/600
+28/28 [==============================] - 51s 2s/step - loss: -0.5981 - dice_coef: 0.7476 - jacc_coef: 0.5981 - val_loss: -0.4028 - val_dice_coef: 0.5695 - val_jacc_coef: 0.4028
+
+Epoch 00566: loss did not improve from -0.60995
+Epoch 567/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5956 - dice_coef: 0.7462 - jacc_coef: 0.5956 - val_loss: -0.4024 - val_dice_coef: 0.5733 - val_jacc_coef: 0.4024
+
+Epoch 00567: loss did not improve from -0.60995
+Epoch 568/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5953 - dice_coef: 0.7459 - jacc_coef: 0.5953 - val_loss: -0.3922 - val_dice_coef: 0.5629 - val_jacc_coef: 0.3922
+
+Epoch 00568: loss did not improve from -0.60995
+Epoch 569/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5925 - dice_coef: 0.7438 - jacc_coef: 0.5925 - val_loss: -0.3929 - val_dice_coef: 0.5636 - val_jacc_coef: 0.3929
+
+Epoch 00569: loss did not improve from -0.60995
+Epoch 570/600
+28/28 [==============================] - 48s 2s/step - loss: -0.6019 - dice_coef: 0.7511 - jacc_coef: 0.6019 - val_loss: -0.3903 - val_dice_coef: 0.5609 - val_jacc_coef: 0.3903
+
+Epoch 00570: loss did not improve from -0.60995
+Epoch 571/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5907 - dice_coef: 0.7418 - jacc_coef: 0.5907 - val_loss: -0.3961 - val_dice_coef: 0.5668 - val_jacc_coef: 0.3961
+
+Epoch 00571: loss did not improve from -0.60995
+Epoch 572/600
+28/28 [==============================] - 49s 2s/step - loss: -0.5911 - dice_coef: 0.7422 - jacc_coef: 0.5911 - val_loss: -0.4064 - val_dice_coef: 0.5775 - val_jacc_coef: 0.4064
+
+Epoch 00572: loss did not improve from -0.60995
+Epoch 573/600
+28/28 [==============================] - 47s 2s/step - loss: -0.5972 - dice_coef: 0.7474 - jacc_coef: 0.5972 - val_loss: -0.3739 - val_dice_coef: 0.5438 - val_jacc_coef: 0.3739
+
+Epoch 00573: loss did not improve from -0.60995
+Epoch 574/600
+28/28 [==============================] - 49s 2s/step - loss: -0.5985 - dice_coef: 0.7485 - jacc_coef: 0.5985 - val_loss: -0.4010 - val_dice_coef: 0.5721 - val_jacc_coef: 0.4010
+
+Epoch 00574: loss did not improve from -0.60995
+Epoch 575/600
+28/28 [==============================] - 48s 2s/step - loss: -0.6006 - dice_coef: 0.7499 - jacc_coef: 0.6006 - val_loss: -0.3927 - val_dice_coef: 0.5633 - val_jacc_coef: 0.3927
+
+Epoch 00575: loss did not improve from -0.60995
+Epoch 576/600
+28/28 [==============================] - 47s 2s/step - loss: -0.5900 - dice_coef: 0.7412 - jacc_coef: 0.5900 - val_loss: -0.3970 - val_dice_coef: 0.5680 - val_jacc_coef: 0.3970
+
+Epoch 00576: loss did not improve from -0.60995
+Epoch 577/600
+28/28 [==============================] - 49s 2s/step - loss: -0.5955 - dice_coef: 0.7461 - jacc_coef: 0.5955 - val_loss: -0.3819 - val_dice_coef: 0.5524 - val_jacc_coef: 0.3819
+
+Epoch 00577: loss did not improve from -0.60995
+Epoch 578/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5971 - dice_coef: 0.7465 - jacc_coef: 0.5971 - val_loss: -0.3920 - val_dice_coef: 0.5629 - val_jacc_coef: 0.3920
+
+Epoch 00578: loss did not improve from -0.60995
+Epoch 579/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5906 - dice_coef: 0.7419 - jacc_coef: 0.5906 - val_loss: -0.4004 - val_dice_coef: 0.5715 - val_jacc_coef: 0.4004
+
+Epoch 00579: loss did not improve from -0.60995
+Epoch 580/600
+28/28 [==============================] - 47s 2s/step - loss: -0.6018 - dice_coef: 0.7507 - jacc_coef: 0.6018 - val_loss: -0.3988 - val_dice_coef: 0.5698 - val_jacc_coef: 0.3988
+
+Epoch 00580: loss did not improve from -0.60995
+Epoch 581/600
+28/28 [==============================] - 49s 2s/step - loss: -0.5970 - dice_coef: 0.7468 - jacc_coef: 0.5970 - val_loss: -0.3961 - val_dice_coef: 0.5669 - val_jacc_coef: 0.3961
+
+Epoch 00581: loss did not improve from -0.60995
+Epoch 582/600
+28/28 [==============================] - 47s 2s/step - loss: -0.5810 - dice_coef: 0.7341 - jacc_coef: 0.5810 - val_loss: -0.3907 - val_dice_coef: 0.5615 - val_jacc_coef: 0.3907
+
+Epoch 00582: loss did not improve from -0.60995
+Epoch 583/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5806 - dice_coef: 0.7335 - jacc_coef: 0.5806 - val_loss: -0.3853 - val_dice_coef: 0.5554 - val_jacc_coef: 0.3853
+
+Epoch 00583: loss did not improve from -0.60995
+Epoch 584/600
+28/28 [==============================] - 49s 2s/step - loss: -0.5821 - dice_coef: 0.7352 - jacc_coef: 0.5821 - val_loss: -0.3967 - val_dice_coef: 0.5674 - val_jacc_coef: 0.3967
+
+Epoch 00584: loss did not improve from -0.60995
+Epoch 585/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5946 - dice_coef: 0.7451 - jacc_coef: 0.5946 - val_loss: -0.4000 - val_dice_coef: 0.5710 - val_jacc_coef: 0.4000
+
+Epoch 00585: loss did not improve from -0.60995
+Epoch 586/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5948 - dice_coef: 0.7452 - jacc_coef: 0.5948 - val_loss: -0.4074 - val_dice_coef: 0.5784 - val_jacc_coef: 0.4074
+
+Epoch 00586: loss did not improve from -0.60995
+Epoch 587/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5960 - dice_coef: 0.7464 - jacc_coef: 0.5960 - val_loss: -0.3977 - val_dice_coef: 0.5685 - val_jacc_coef: 0.3977
+
+Epoch 00587: loss did not improve from -0.60995
+Epoch 588/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5969 - dice_coef: 0.7469 - jacc_coef: 0.5969 - val_loss: -0.4038 - val_dice_coef: 0.5748 - val_jacc_coef: 0.4038
+
+Epoch 00588: loss did not improve from -0.60995
+Epoch 589/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5997 - dice_coef: 0.7492 - jacc_coef: 0.5997 - val_loss: -0.4024 - val_dice_coef: 0.5736 - val_jacc_coef: 0.4024
+
+Epoch 00589: loss did not improve from -0.60995
+Epoch 590/600
+28/28 [==============================] - 51s 2s/step - loss: -0.6009 - dice_coef: 0.7497 - jacc_coef: 0.6009 - val_loss: -0.3718 - val_dice_coef: 0.5372 - val_jacc_coef: 0.3718
+
+Epoch 00590: loss did not improve from -0.60995
+Epoch 591/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5909 - dice_coef: 0.7421 - jacc_coef: 0.5909 - val_loss: -0.3973 - val_dice_coef: 0.5680 - val_jacc_coef: 0.3973
+
+Epoch 00591: loss did not improve from -0.60995
+Epoch 592/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5988 - dice_coef: 0.7481 - jacc_coef: 0.5988 - val_loss: -0.3804 - val_dice_coef: 0.5504 - val_jacc_coef: 0.3804
+
+Epoch 00592: loss did not improve from -0.60995
+Epoch 593/600
+28/28 [==============================] - 49s 2s/step - loss: -0.5981 - dice_coef: 0.7478 - jacc_coef: 0.5981 - val_loss: -0.4027 - val_dice_coef: 0.5736 - val_jacc_coef: 0.4027
+
+Epoch 00593: loss did not improve from -0.60995
+Epoch 594/600
+28/28 [==============================] - 48s 2s/step - loss: -0.6073 - dice_coef: 0.7550 - jacc_coef: 0.6073 - val_loss: -0.4022 - val_dice_coef: 0.5733 - val_jacc_coef: 0.4022
+
+Epoch 00594: loss did not improve from -0.60995
+Epoch 595/600
+28/28 [==============================] - 47s 2s/step - loss: -0.5923 - dice_coef: 0.7434 - jacc_coef: 0.5923 - val_loss: -0.3990 - val_dice_coef: 0.5697 - val_jacc_coef: 0.3990
+
+Epoch 00595: loss did not improve from -0.60995
+Epoch 596/600
+28/28 [==============================] - 48s 2s/step - loss: -0.6006 - dice_coef: 0.7498 - jacc_coef: 0.6006 - val_loss: -0.3977 - val_dice_coef: 0.5684 - val_jacc_coef: 0.3977
+
+Epoch 00596: loss did not improve from -0.60995
+Epoch 597/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5975 - dice_coef: 0.7476 - jacc_coef: 0.5975 - val_loss: -0.3914 - val_dice_coef: 0.5619 - val_jacc_coef: 0.3914
+
+Epoch 00597: loss did not improve from -0.60995
+Epoch 598/600
+28/28 [==============================] - 49s 2s/step - loss: -0.6038 - dice_coef: 0.7524 - jacc_coef: 0.6038 - val_loss: -0.3902 - val_dice_coef: 0.5608 - val_jacc_coef: 0.3902
+
+Epoch 00598: loss did not improve from -0.60995
+Epoch 599/600
+28/28 [==============================] - 47s 2s/step - loss: -0.6065 - dice_coef: 0.7541 - jacc_coef: 0.6065 - val_loss: -0.3945 - val_dice_coef: 0.5652 - val_jacc_coef: 0.3945
+
+Epoch 00599: loss did not improve from -0.60995
+Epoch 600/600
+28/28 [==============================] - 48s 2s/step - loss: -0.5928 - dice_coef: 0.7436 - jacc_coef: 0.5928 - val_loss: -0.3904 - val_dice_coef: 0.5610 - val_jacc_coef: 0.3904
+
+Epoch 00600: loss did not improve from -0.60995
